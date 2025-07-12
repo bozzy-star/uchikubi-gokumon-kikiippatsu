@@ -3,20 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Game App</title>
+    <title>打首獄門危機一髪 - お白洲の裁き</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <h1>My Game App</h1>
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <div id="controls">
-            <button id="startBtn">Start Game</button>
-            <button id="pauseBtn">Pause</button>
-            <button id="resetBtn">Reset</button>
+        <header>
+            <h1>打首獄門危機一髪</h1>
+            <p class="subtitle">～お白洲の裁き～</p>
+        </header>
+        
+        <div id="court-scene">
+            <div id="character-area">
+                <div id="magistrate" class="character">
+                    <div class="character-image">👨‍⚖️</div>
+                    <div class="character-name">御奉行様</div>
+                </div>
+                <div id="defendant" class="character">
+                    <div class="character-image">🧑</div>
+                    <div class="character-name">あなた</div>
+                </div>
+            </div>
+            
+            <div id="mood-indicator">
+                <div class="mood-label">御奉行様の心証</div>
+                <div id="mood-bar">
+                    <div id="mood-fill"></div>
+                </div>
+                <div id="mood-text">普通</div>
+            </div>
+            
+            <div id="dialogue-area">
+                <div id="scene-description"></div>
+                <div id="dialogue-box">
+                    <div id="speaker-name"></div>
+                    <div id="dialogue-text"></div>
+                </div>
+            </div>
+            
+            <div id="question-area">
+                <div id="question-text"></div>
+                <div id="evidence-display"></div>
+                <div id="time-limit">
+                    <span>残り時間: </span>
+                    <span id="timer">30</span>
+                    <span>秒</span>
+                </div>
+            </div>
+            
+            <div id="input-area">
+                <textarea id="player-input" placeholder="ここに回答を入力してください..."></textarea>
+                <button id="submit-btn">回答する</button>
+            </div>
+            
+            <div id="controls">
+                <button id="start-btn">ゲーム開始</button>
+                <button id="reset-btn">最初から</button>
+                <button id="save-btn">記録</button>
+                <button id="load-btn">読込</button>
+            </div>
         </div>
-        <div id="score">Score: <span id="scoreValue">0</span></div>
+        
+        <div id="game-info">
+            <div id="crime-info">
+                <h3>罪状</h3>
+                <div id="crime-description"></div>
+            </div>
+            <div id="evidence-list">
+                <h3>証拠品</h3>
+                <ul id="evidence-items"></ul>
+            </div>
+        </div>
+        
+        <div id="ending-screen" class="hidden">
+            <div id="ending-content">
+                <h2 id="ending-title"></h2>
+                <div id="ending-image"></div>
+                <p id="ending-text"></p>
+                <button id="restart-btn">もう一度挑戦</button>
+            </div>
+        </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

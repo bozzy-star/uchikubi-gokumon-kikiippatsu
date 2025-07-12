@@ -1,66 +1,386 @@
+/* 江戸時代風デザイン */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+
+:root {
+    --edo-brown: #8b4513;
+    --edo-gold: #ffd700;
+    --edo-red: #dc143c;
+    --edo-dark: #2f1b14;
+    --edo-paper: #f4f0e6;
+    --edo-ink: #1a1a1a;
+    --mood-excellent: #228b22;
+    --mood-good: #7cfc00;
+    --mood-neutral: #ffa500;
+    --mood-bad: #ff4500;
+    --mood-terrible: #8b0000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #1a1a2e;
-    color: white;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Noto Serif JP', serif;
+    background: linear-gradient(135deg, var(--edo-dark) 0%, var(--edo-brown) 100%);
+    color: var(--edo-paper);
     min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
 }
 
 #game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+header {
     text-align: center;
-    background-color: #16213e;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, var(--edo-brown), var(--edo-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin: 10px 0 0 0;
+    color: var(--edo-gold);
+    font-weight: 400;
+}
+
+/* メインゲーム画面 */
+#court-scene {
+    background: var(--edo-paper);
+    color: var(--edo-ink);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 
+        0 0 30px rgba(139, 69, 19, 0.3),
+        inset 0 0 50px rgba(255, 215, 0, 0.1);
+    border: 3px solid var(--edo-brown);
+    flex: 1;
+}
+
+/* キャラクターエリア */
+#character-area {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, rgba(139, 69, 19, 0.1), transparent);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
 }
 
-h1 {
-    color: #0db8de;
+.character {
+    text-align: center;
+    padding: 10px;
+}
+
+.character-image {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.character-name {
+    font-weight: 700;
+    color: var(--edo-brown);
+    font-size: 1.1rem;
+}
+
+/* 心証メーター */
+#mood-indicator {
+    text-align: center;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(139, 69, 19, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--edo-brown);
 }
 
-#gameCanvas {
-    border: 2px solid #0db8de;
-    border-radius: 5px;
-    background-color: #000;
+.mood-label {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--edo-brown);
+}
+
+#mood-bar {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, var(--mood-terrible), var(--mood-bad), var(--mood-neutral), var(--mood-good), var(--mood-excellent));
+    border-radius: 10px;
+    border: 2px solid var(--edo-brown);
+    position: relative;
+    overflow: hidden;
+}
+
+#mood-fill {
+    height: 100%;
+    width: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    transition: width 0.5s ease;
+    border-radius: 8px;
+}
+
+#mood-text {
+    margin-top: 5px;
+    font-weight: 700;
+    color: var(--edo-brown);
+}
+
+/* 対話エリア */
+#dialogue-area {
     margin-bottom: 20px;
 }
 
-#controls {
+#scene-description {
+    background: rgba(139, 69, 19, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-style: italic;
+    border-left: 4px solid var(--edo-gold);
+}
+
+#dialogue-box {
+    background: white;
+    border: 2px solid var(--edo-brown);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#speaker-name {
+    font-weight: 700;
+    color: var(--edo-red);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+#dialogue-text {
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* 質問エリア */
+#question-area {
     margin-bottom: 20px;
 }
 
+#question-text {
+    background: var(--edo-gold);
+    color: var(--edo-ink);
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    border: 2px solid var(--edo-brown);
+}
+
+#evidence-display {
+    background: rgba(220, 20, 60, 0.1);
+    border: 2px dashed var(--edo-red);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    display: none;
+}
+
+#time-limit {
+    text-align: center;
+    font-weight: 700;
+    color: var(--edo-red);
+    font-size: 1.1rem;
+}
+
+#timer {
+    font-size: 1.5rem;
+    color: var(--edo-red);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 入力エリア */
+#input-area {
+    margin-bottom: 20px;
+}
+
+#player-input {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border: 3px solid var(--edo-brown);
+    border-radius: 10px;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    resize: vertical;
+    background: white;
+    color: var(--edo-ink);
+}
+
+#player-input:focus {
+    outline: none;
+    border-color: var(--edo-gold);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* ボタン */
 button {
-    background-color: #0db8de;
+    background: linear-gradient(45deg, var(--edo-brown), var(--edo-gold));
     color: white;
     border: none;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    margin: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--edo-brown);
 }
 
 button:hover {
-    background-color: #0a9fd1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, var(--edo-gold), var(--edo-brown));
 }
 
 button:active {
-    background-color: #087ca8;
+    transform: translateY(0);
 }
 
-#score {
-    font-size: 18px;
-    font-weight: bold;
-    color: #0db8de;
+#submit-btn {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 15px;
+    margin-top: 10px;
 }
 
-#scoreValue {
-    color: #fff;
+/* コントロール */
+#controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ゲーム情報 */
+#game-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#crime-info, #evidence-list {
+    background: rgba(139, 69, 19, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--edo-brown);
+}
+
+#crime-info h3, #evidence-list h3 {
+    color: var(--edo-red);
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+#evidence-items {
+    list-style: none;
+    padding: 0;
+}
+
+#evidence-items li {
+    background: rgba(255, 255, 255, 0.7);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border-left: 3px solid var(--edo-gold);
+}
+
+/* エンディング画面 */
+#ending-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#ending-content {
+    background: var(--edo-paper);
+    color: var(--edo-ink);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    border: 3px solid var(--edo-gold);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+#ending-title {
+    color: var(--edo-red);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#ending-text {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    #character-area {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .character-image {
+        font-size: 3rem;
+    }
+    
+    #game-info {
+        grid-template-columns: 1fr;
+    }
+    
+    #court-scene {
+        padding: 15px;
+    }
 }

@@ -1,0 +1,217 @@
+{
+  "title": "盗みの嫌疑",
+  "description": "商家の金子が盗まれた事件",
+  "crime": "窃盗",
+  "severity": "軽犯罪",
+  "initialMood": 0,
+  "timeLimit": 30,
+  "phases": [
+    {
+      "id": "intro",
+      "title": "導入",
+      "background": "気がつくと、あなたは畳の上に座らされていた。目の前には威厳ある御奉行様が座している。",
+      "dialogue": [
+        {
+          "speaker": "御奉行",
+          "text": "おのれ、目を覚ましたか。"
+        },
+        {
+          "speaker": "御奉行", 
+          "text": "このたび、米問屋「丸八」より金子五両が盗まれた件につき、そなたに嫌疑がかかっておる。"
+        },
+        {
+          "speaker": "御奉行",
+          "text": "まずは名前を申せ。"
+        }
+      ],
+      "question": {
+        "type": "open",
+        "text": "お前の名前は何と申すか？",
+        "hints": ["正直に答える", "偽名を使う", "記憶がないと答える"],
+        "responses": [
+          {
+            "keywords": ["覚えて", "記憶", "わからない", "忘れ"],
+            "moodChange": -5,
+            "reply": "記憶を失っておるのか？怪しい奴じゃ。"
+          },
+          {
+            "keywords": ["正直", "実は", "本当"],
+            "moodChange": 5,
+            "reply": "ほう、素直に答えるか。"
+          },
+          {
+            "keywords": ["無実", "無罪", "やって"],
+            "moodChange": -3,
+            "reply": "まだ何も聞いておらぬのに無実とは何事か。"
+          }
+        ],
+        "defaultResponse": {
+          "moodChange": 0,
+          "reply": "その名、確かに聞き取った。"
+        }
+      }
+    },
+    {
+      "id": "evidence1", 
+      "title": "証拠品提示",
+      "background": "与力が一枚の手ぬぐいを持参した。",
+      "dialogue": [
+        {
+          "speaker": "与力",
+          "text": "御奉行様、現場にてこのような物が見つかりました。"
+        },
+        {
+          "speaker": "御奉行",
+          "text": "ほほう、これは手ぬぐいじゃな。「○○」と染め抜いてある。"
+        }
+      ],
+      "question": {
+        "type": "open", 
+        "text": "この手ぬぐいに心当たりはあるか？",
+        "evidence": "血のついた手ぬぐい",
+        "responses": [
+          {
+            "keywords": ["知らない", "見た", "ない", "わからない"],
+            "moodChange": -3,
+            "reply": "知らぬとは白々しい。よく見よ。"
+          },
+          {
+            "keywords": ["盗まれた", "なくし", "落とし"],
+            "moodChange": 2,
+            "reply": "盗まれたと申すか。いつのことじゃ？"
+          },
+          {
+            "keywords": ["自分", "私の", "俺の"],
+            "moodChange": 10,
+            "reply": "正直に申すか。感心じゃ。"
+          }
+        ],
+        "defaultResponse": {
+          "moodChange": -1,
+          "reply": "はっきりせぬ答えじゃな。"
+        }
+      }
+    },
+    {
+      "id": "motive",
+      "title": "動機の追求", 
+      "dialogue": [
+        {
+          "speaker": "御奉行",
+          "text": "米問屋の主人によれば、そなたは先月より店に出入りしていたとのこと。"
+        },
+        {
+          "speaker": "御奉行",
+          "text": "金子の在り処も知っていたであろう。"
+        }
+      ],
+      "question": {
+        "type": "open",
+        "text": "なぜ米問屋に出入りしていたのじゃ？",
+        "responses": [
+          {
+            "keywords": ["仕事", "働い", "雇われ", "手伝"],
+            "moodChange": 8,
+            "reply": "仕事で出入りしていたと申すか。真面目な者のようじゃな。"
+          },
+          {
+            "keywords": ["借金", "金", "困って", "貧乏"],
+            "moodChange": -8,
+            "reply": "金に困っていたのか。動機十分じゃな。"
+          },
+          {
+            "keywords": ["友人", "知り合い", "頼まれ"],
+            "moodChange": 3,
+            "reply": "知人の頼みとは？詳しく申せ。"
+          }
+        ],
+        "defaultResponse": {
+          "moodChange": -2,
+          "reply": "曖昧な答えでは納得できぬ。"
+        }
+      }
+    },
+    {
+      "id": "final",
+      "title": "最終弁明",
+      "dialogue": [
+        {
+          "speaker": "御奉行", 
+          "text": "証拠品も揃い、動機もある。"
+        },
+        {
+          "speaker": "御奉行",
+          "text": "最後に何か申すことはあるか？"
+        }
+      ],
+      "question": {
+        "type": "open",
+        "text": "最後の弁明を聞こう。",
+        "responses": [
+          {
+            "keywords": ["無実", "やって", "犯人", "別", "真犯人"],
+            "moodChange": 5,
+            "reply": "ほう、真犯人がいると申すか。"
+          },
+          {
+            "keywords": ["家族", "母", "父", "子", "妻"],
+            "moodChange": 12,
+            "reply": "家族を思う心、美しいものじゃ。"
+          },
+          {
+            "keywords": ["反省", "申し訳", "すまない", "悪かった"],
+            "moodChange": 8,
+            "reply": "素直に謝罪するか。心根は悪くないようじゃ。"
+          },
+          {
+            "keywords": ["金", "返す", "弁償", "償い"],
+            "moodChange": 10,
+            "reply": "償いをすると申すか。殊勝な心がけじゃ。"
+          }
+        ],
+        "defaultResponse": {
+          "moodChange": 0,
+          "reply": "そうか、心得た。"
+        }
+      }
+    }
+  ],
+  "endings": {
+    "無罪放免": {
+      "minMood": 25,
+      "title": "お上の慈悲",
+      "text": "御奉行様は微笑みながら言った。「そなたの心根、よく分かった。この件は無罪放免とする。今後気をつけよ。」",
+      "image": "gavel_innocent.jpg"
+    },
+    "叱責": {
+      "minMood": 15,
+      "title": "温情判決", 
+      "text": "御奉行様は厳しく言った。「証拠不十分につき放免とするが、今後は気をつけよ。」",
+      "image": "warning.jpg"
+    },
+    "過料": {
+      "minMood": 5,
+      "title": "軽微な処分",
+      "text": "御奉行様は判決を下した。「過料銀三匁を申し付ける。二度とこのような事をするでないぞ。」",
+      "image": "fine.jpg"
+    },
+    "笞打ち": {
+      "minMood": -5,
+      "title": "軽き刑",
+      "text": "御奉行様は冷たく言った。「笞打ち十回を申し付ける。これに懲りよ。」",
+      "image": "whip.jpg"
+    },
+    "遠島": {
+      "minMood": -15,
+      "title": "遠き島へ",
+      "text": "御奉行様は重々しく言った。「八丈島遠島を申し付ける。島にて罪を償え。」",
+      "image": "island.jpg"
+    },
+    "獄門": {
+      "minMood": -25,
+      "title": "見せしめ",
+      "text": "御奉行様は無慈悲に言った。「獄門に処する。見せしめとして三日三晩晒すものとする。」",
+      "image": "execution.jpg"
+    }
+  }
+}
