@@ -219,28 +219,72 @@ header h1 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* 入力エリア */
-#input-area {
-    margin-bottom: 20px;
+/* 質問カウンター */
+#question-count {
+    text-align: center;
+    font-weight: 700;
+    color: var(--edo-brown);
+    font-size: 1.1rem;
+    margin-top: 10px;
 }
 
-#player-input {
-    width: 100%;
-    height: 100px;
-    padding: 15px;
+/* 選択肢エリア */
+#choices-area {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.choice-btn {
+    background: linear-gradient(135deg, var(--edo-paper), rgba(139, 69, 19, 0.1));
+    color: var(--edo-ink);
     border: 3px solid var(--edo-brown);
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    cursor: pointer;
     font-family: 'Noto Serif JP', serif;
     font-size: 1rem;
-    resize: vertical;
-    background: white;
-    color: var(--edo-ink);
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.4;
+    min-height: 80px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#player-input:focus {
-    outline: none;
+.choice-btn:hover {
+    background: linear-gradient(135deg, var(--edo-gold), rgba(255, 215, 0, 0.2));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 69, 19, 0.3);
     border-color: var(--edo-gold);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.choice-btn:active {
+    transform: translateY(0);
+}
+
+.choice-btn.selected {
+    background: linear-gradient(135deg, var(--edo-gold), var(--edo-brown));
+    color: white;
+    border-color: var(--edo-red);
+    box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+}
+
+/* 回答表示エリア */
+#player-response-area {
+    margin: 20px 0;
+    min-height: 60px;
+}
+
+#selected-answer {
+    background: rgba(220, 20, 60, 0.1);
+    border: 2px solid var(--edo-red);
+    border-radius: 10px;
+    padding: 15px;
+    font-weight: 700;
+    color: var(--edo-red);
+    display: none;
 }
 
 /* ボタン */
@@ -324,10 +368,14 @@ button:active {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    display: flex;
+    display: none; /* 初期状態で非表示 */
     align-items: center;
     justify-content: center;
     z-index: 1000;
+}
+
+#ending-screen.show {
+    display: flex;
 }
 
 #ending-content {

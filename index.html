@@ -44,16 +44,23 @@
             <div id="question-area">
                 <div id="question-text"></div>
                 <div id="evidence-display"></div>
-                <div id="time-limit">
-                    <span>残り時間: </span>
-                    <span id="timer">30</span>
-                    <span>秒</span>
+                <div id="question-count">
+                    <span>質問 </span>
+                    <span id="current-question">1</span>
+                    <span> / </span>
+                    <span id="total-questions">30</span>
                 </div>
             </div>
             
-            <div id="input-area">
-                <textarea id="player-input" placeholder="ここに回答を入力してください..."></textarea>
-                <button id="submit-btn">回答する</button>
+            <div id="choices-area">
+                <button class="choice-btn" id="choice-a" data-choice="a">A. </button>
+                <button class="choice-btn" id="choice-b" data-choice="b">B. </button>
+                <button class="choice-btn" id="choice-c" data-choice="c">C. </button>
+                <button class="choice-btn" id="choice-d" data-choice="d">D. </button>
+            </div>
+            
+            <div id="player-response-area">
+                <div id="selected-answer"></div>
             </div>
             
             <div id="controls">
@@ -75,7 +82,7 @@
             </div>
         </div>
         
-        <div id="ending-screen" class="hidden">
+        <div id="ending-screen" class="hidden" style="display: none;">
             <div id="ending-content">
                 <h2 id="ending-title"></h2>
                 <div id="ending-image"></div>
